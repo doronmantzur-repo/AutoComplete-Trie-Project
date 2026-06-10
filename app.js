@@ -1,6 +1,7 @@
-import promptSync from "prompt-sync";
-import { validate } from "revalidator";
-const prompt = promptSync();
+// import promptSync from "prompt-sync";
+
+const { validateCommand } = require("./validation.js");
+const prompt = require("prompt-sync")();
 
 console.log("=== AutoComplete Trie Console ===");
 console.log("Type 'help' for commands");
@@ -20,7 +21,7 @@ while (true) {
     argument = selectedOption[1];
   }
 
-  cmdValid = validateCommands(command, argument);
+  cmdValid = validateCommand(command, argument);
   if (!cmdValid.valid) {
     console.log("Invalid command: " + cmdValid.errors[0].message);
     continue;
