@@ -80,6 +80,7 @@ module.exports = { trieNode };
 
 const root = new trieNode("");
 root.addWord("qw");
+console.log(root.useWord("qw"));
 
 words = root.predictWords("qw");
 console.log(words)
