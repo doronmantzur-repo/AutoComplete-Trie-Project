@@ -27,7 +27,10 @@ class trieNode {
     for (let i = 0; i < characters.length; i++) {
       const char = characters[i];
       if (currentNode.children[char]) {
-        if (currentNode.children[char].endOfWord && i === characters.length - 1) {
+        if (
+          currentNode.children[char].endOfWord &&
+          i === characters.length - 1
+        ) {
           return true;
         }
         currentNode = currentNode.children[char];
@@ -60,19 +63,17 @@ class trieNode {
   }
 }
 
-
 module.exports = { trieNode };
 
-//  const root = new trieNode("");
-//  root.addWord("hel");
-// root.addWord(root, "helllo");
-// root.addWord(root, "hi");
-// root.addWord(root, "hey");
-// root.addWord(root, "he");
-// // console.log(root.findWord(root, "hello")); // true
-// console.log(root.findWord("hel"));
-// console.log(root.findWord(root, "hey"));
-// console.log(root.findWord(root, "he"));
-// // console.log(root.findWord(root, "ber"));
-// // console.log(_getRemainingTree("h", root.children["h"])); // ["llo", "i", "y"]
-// console.log(root.predictWords("he", root)); // ["hello", "hi", "hey", "he"]
+
+
+// const root = new trieNode("");
+// // root.addWord("qw");
+// // root.addWord("qwe");
+// // root.addWord("qweds");
+// // root.addWord("qasd");
+// root.addWord("qsdt");
+// root.addWord("qert");
+
+// console.log(root.predictWords("q")); // ["hello", "hi", "hey", "he"]
+// console.log(root.findWord("qsert")); // ["hello", "hi", "hey", "he"]
