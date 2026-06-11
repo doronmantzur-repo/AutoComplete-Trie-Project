@@ -1,38 +1,43 @@
 const { validateArguments, validateCommand } = require("./validation.js");
 const { handleCommand } = require("./handleCommand.js");
 const { trieNode } = require("./auto-complete.js");
+const { execSync } = require("node:child_process");
 const prompt = require("prompt-sync")();
 
 console.log("=== AutoComplete Trie Console ===");
 console.log("Type 'help' for commands");
 const root = new trieNode("");
 
-while (true) {
-  console.log("\n");
-  let selectedOption = prompt();
-  selectedOption = selectedOption.split(" ");
-  const command = selectedOption[0];
+const handleSelection = function (selection) {
+  selection = selection.split(" ");
+  let command = selection[0];
   let argument = "";
+  let statusObj = { printMsg: "", terminate: false };
 
   const cmdStatus = validateCommand(command);
   if (!cmdStatus.valid) {
-    console.log(cmdStatus.errors[0].message);
-    continue;
-  }
+    statusObj.printMsg = cmdStatus.errors[0].message;
+  } else {
+    command = command.toLowerCase();
+    if (command !== "help" || command != "exit") {
+      argument = selection[1];
+    }
 
-  if (command !== "help" || command != "exit") {
-    argument = selectedOption[1];
+    cmdValid = validateArguments(command, argument);
+    if (!cmdValid.valid) {
+      statusObj.printMsg = cmdValid.errors[0].message;
+    } else {
+      statusObj.printMsg = handleCommand(root, command, argument);
+      if (command === "exit") statusObj.terminate = true;
+    }
   }
+  return statusObj;
+};
 
-  cmdValid = validateArguments(command, argument);
-  if (!cmdValid.valid) {
-    console.log(cmdValid.errors[0].message);
-    continue;
-  }
+while (true) {
 
-  let cmdExeStatus = handleCommand(root, command, argument);
-  console.log(cmdExeStatus);
-  if (cmdStatus.valid && command.toLocaleLowerCase() == "exit") {
-    break;
-  }
+  let selectedOption = prompt();
+  exeStatus = handleSelection(selectedOption);
+  console.log(exeStatus.printMsg);
+  if (exeStatus.terminate) break;
 }

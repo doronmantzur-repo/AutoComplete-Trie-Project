@@ -3,7 +3,7 @@ const validateCommand = (command) => {
   const errors = [];
 
   if (!validCommands.includes(command.toLowerCase())) {
-    errors.push({message: "Invalid command" });
+    errors.push({message: "Invalid command\n" });
   }
 
   return {
@@ -18,11 +18,11 @@ const validateArguments = (command, argument) => {
   command = command.toLowerCase();
   if (command === "add" || command === "find" || command === "complete") {
     if (!argument) {
-      errors.push({ message: "Argument is required" });
+      errors.push({ message: "Argument is required\n" });
     }
     else if(!/^[A-Za-z]+$/.test(argument))
     {
-        errors.push({ message: "Please use alphabet only"});
+        errors.push({ message: "Please use alphabet only\n"});
     }
   }
 
