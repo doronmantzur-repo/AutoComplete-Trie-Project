@@ -3,7 +3,7 @@ const validateCommand = (command) => {
   const errors = [];
 
   if (!validCommands.includes(command.toLowerCase())) {
-    errors.push({ message: "Invalid command" });
+    errors.push({message: "Invalid command" });
   }
 
   return {
@@ -15,6 +15,7 @@ const validateCommand = (command) => {
 
 const validateArguments = (command, argument) => {
   const errors = [];
+  command = command.toLowerCase();
   if (command === "add" || command === "find" || command === "complete") {
     if (!argument) {
       errors.push({ message: "Argument is required" });

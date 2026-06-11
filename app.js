@@ -16,7 +16,7 @@ while (true) {
 
   const cmdStatus = validateCommand(command);
   if (!cmdStatus.valid) {
-    console.log(cmdValid.errors[0].message);
+    console.log(cmdStatus.errors[0].message);
     continue;
   }
 
