@@ -18,9 +18,9 @@ const handleCommand = (root, command, argument) => {
 
     case "find":
       isExist = root.findWord(argument);
-      return (isExist
+      return isExist
         ? `${argument.toLowerCase()} found\n`
-        : `${argument.toLowerCase()} not found\n`);
+        : `${argument.toLowerCase()} not found\n`;
 
     case "complete":
       words = root.predictWords(argument);
@@ -31,6 +31,10 @@ const handleCommand = (root, command, argument) => {
 
     case "exit":
       return "Goodbye !";
+
+    case "use":
+      rank = root.useWord(argument)
+      return `Incremented usage for ${argument} (now ${rank})`;
   }
 };
 

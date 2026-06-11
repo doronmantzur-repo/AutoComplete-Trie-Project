@@ -1,9 +1,14 @@
-const { _getRemainingTree } = require("./auto-complete-helper.js");
+const {
+  _getRemainingTree,
+  _updateWordUsage,
+  _reorderWords,
+} = require("./auto-complete-helper.js");
 class trieNode {
   constructor(value) {
     this.children = {};
     this.value = value;
     this.endOfWord = false;
+    this.rank = 0;
   }
   addWord(word) {
     const characters = word.toLowerCase().split("");
@@ -51,7 +56,7 @@ class trieNode {
         currentNode = currentNode.children[char];
         if (i === characters.length - 1) {
           if (currentNode.endOfWord) {
-            words.push(prefix);
+            words.push({word:prefix, rank:0});
           }
           words.push(..._getRemainingTree(prefix, currentNode));
         }
@@ -59,16 +64,25 @@ class trieNode {
         return words;
       }
     }
-    return words;
+    return _reorderWords(words);
+  }
+
+  useWord(word) {
+    let rank = 0;
+    if (this.findWord(word)) {
+      rank = _updateWordUsage(word, this);
+    }
+    return rank;
   }
 }
 
 module.exports = { trieNode };
 
+const root = new trieNode("");
+root.addWord("qw");
 
-
-// const root = new trieNode("");
-// // root.addWord("qw");
+words = root.predictWords("qw");
+console.log(words)
 // // root.addWord("qwe");
 // // root.addWord("qweds");
 // // root.addWord("qasd");

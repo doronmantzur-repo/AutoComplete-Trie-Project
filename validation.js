@@ -1,5 +1,5 @@
 const validateCommand = (command) => {
-  const validCommands = ["add", "find", "complete", "help", "exit"];
+  const validCommands = ["add", "find", "complete", "help", "exit", "use"];
   const errors = [];
 
   if (!validCommands.includes(command.toLowerCase())) {
