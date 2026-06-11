@@ -3,8 +3,7 @@ const helpStr = `Commands:
   find <word>     - Check if word exists
   complete <prefix> - Get completions
   help           - Show this message
-  exit           - Quit program
-`;
+  exit           - Quit program\n`;
 
 const handleCommand = (root, command, argument) => {
   words = [];
@@ -15,13 +14,13 @@ const handleCommand = (root, command, argument) => {
   switch (command.toLowerCase()) {
     case "add":
       root.addWord(argument);
-      return `${argument} was added successfuly !!`;
+      return `${argument} was added successfuly !!\n`;
 
     case "find":
       isExist = root.findWord(argument);
       return (isExist
-        ? `${argument.toLowerCase()} found`
-        : `${argument.toLowerCase()} not found`);
+        ? `${argument.toLowerCase()} found\n`
+        : `${argument.toLowerCase()} not found\n`);
 
     case "complete":
       words = root.predictWords(argument);
