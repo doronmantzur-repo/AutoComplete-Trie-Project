@@ -5,9 +5,9 @@ class trieNode {
     this.value = value;
     this.endOfWord = false;
   }
-  addWord(root, word) {
-    const characters = word.split("");
-    let currentNode = root;
+  addWord(word) {
+    const characters = word.toLowerCase().split("");
+    let currentNode = this;
     for (let i = 0; i < characters.length; i++) {
       const char = characters[i];
       if (!currentNode.children[char]) {
@@ -21,13 +21,13 @@ class trieNode {
     }
   }
 
-  findWord(root, word) {
-    const characters = word.split("");
-    let currentNode = root;
+  findWord(word) {
+    const characters = word.toLowerCase().split("");
+    let currentNode = this;
     for (let i = 0; i < characters.length; i++) {
       const char = characters[i];
       if (currentNode.children[char]) {
-        if (currentNode.endOfWord && i === characters.length - 1) {
+        if (currentNode.children[char].endOfWord && i === characters.length - 1) {
           return true;
         }
         currentNode = currentNode.children[char];
@@ -37,9 +37,10 @@ class trieNode {
     }
   }
 
-  predictWords(prefix, root) {
+  predictWords(prefix) {
+    prefix = prefix.toLowerCase();
     const characters = prefix.split("");
-    let currentNode = root;
+    let currentNode = this;
     let words = [];
     for (let i = 0; i < characters.length; i++) {
       const char = characters[i];
@@ -62,15 +63,14 @@ class trieNode {
 
 module.exports = { trieNode };
 
-
-// const root = new trieNode("");
-// root.addWord(root, "hel");
+//  const root = new trieNode("");
+//  root.addWord("hel");
 // root.addWord(root, "helllo");
 // root.addWord(root, "hi");
 // root.addWord(root, "hey");
 // root.addWord(root, "he");
 // // console.log(root.findWord(root, "hello")); // true
-// console.log(root.findWord(root, "hi"));
+// console.log(root.findWord("hel"));
 // console.log(root.findWord(root, "hey"));
 // console.log(root.findWord(root, "he"));
 // // console.log(root.findWord(root, "ber"));
