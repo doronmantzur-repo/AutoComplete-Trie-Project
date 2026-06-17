@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="main.js"></script>
+    <script type="module" src="handleSelection.js"></script>
+    <script type="module" src="auto-complete.js"></script>
+    <script type="module" src="auto-complete-helper.js"></script>
+    <script type="module" src="handleCommand.js"></script>
+    <script type="module" src="validation.js"></script>
+  </head>
+  <body>
+    <form class="my-form">
+      <div>
+        <input
+          class="word"
+          id="word-input"
+          placeholder="Enter a word to add to dicitionary"
+          type="text"
+        />
+        <button id="add-word" class="my-button">Add Word</button>
+      </div>
+      
+      
+      <div>
+        <label id="status-msg" class="feedback"></label>
+      </div>
+      
+      <div class ="input-wrapper">
+        <input
+          id="suggestion-input"
+          placeholder="start typing to see suggestions..."
+          type="text"
+          class = "my-label"
+        />
+        <div id = "sugg-dropdown" >
+          <ul id = "word-list"></ul>
+        </div>
+      </div>
+      
+      <div>
+        <div class = "total-words">
+          <label id = "num-of-words" class="num-label">0</label>
+          <label class="my-label">Words in dictionary</label>
+        </div>
+      </div>
+    
+    </form>
+  </body>
+</html>

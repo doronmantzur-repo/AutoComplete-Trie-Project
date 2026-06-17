@@ -1,28 +1,36 @@
-const {
-  _getRemainingTree,
-  _updateWordUsage,
-  _reorderWords,
-} = require("./auto-complete-helper.js");
-class trieNode {
+
+import { _getRemainingTree } from "./auto-complete-helper.js";
+import { _updateWordUsage } from "./auto-complete-helper.js";
+import { _reorderWords } from "./auto-complete-helper.js";
+export class trieNode {
   constructor(value) {
     this.children = {};
     this.value = value;
     this.endOfWord = false;
     this.rank = 0;
+    this.numberOfWords = 0;
   }
+  
   addWord(word) {
     const characters = word.toLowerCase().split("");
-    let currentNode = this;
-    for (let i = 0; i < characters.length; i++) {
-      const char = characters[i];
-      if (!currentNode.children[char]) {
-        currentNode.children[char] = new trieNode(char);
-      }
+    if (this.findWord(word)) {
+      this.useWord(word);
+      return `${word} is already exist`;
+    } else {
+      let currentNode = this;
+      for (let i = 0; i < characters.length; i++) {
+        const char = characters[i];
+        if (!currentNode.children[char]) {
+          currentNode.children[char] = new trieNode(char);
+        }
 
-      if (i === characters.length - 1) {
-        currentNode.children[char].endOfWord = true;
+        if (i === characters.length - 1) {
+          currentNode.children[char].endOfWord = true;
+        }
+        currentNode = currentNode.children[char];
       }
-      currentNode = currentNode.children[char];
+      this.numberOfWords += 1;
+      return `${word} was added successfuly`
     }
   }
 
@@ -56,7 +64,7 @@ class trieNode {
         currentNode = currentNode.children[char];
         if (i === characters.length - 1) {
           if (currentNode.endOfWord) {
-            words.push({word:prefix, rank:0});
+            words.push({ word: prefix, rank: currentNode.rank });
           }
           words.push(..._getRemainingTree(prefix, currentNode));
         }
@@ -76,14 +84,14 @@ class trieNode {
   }
 }
 
-module.exports = { trieNode };
+// module.exports = { trieNode };
 
-const root = new trieNode("");
-root.addWord("qw");
-console.log(root.useWord("qw"));
+// const root = new trieNode("");
+// root.addWord("qw");
+// console.log(root.useWord("qw"));
 
-words = root.predictWords("qw");
-console.log(words)
+// words = root.predictWords("qw");
+// console.log(words)
 // // root.addWord("qwe");
 // // root.addWord("qweds");
 // // root.addWord("qasd");

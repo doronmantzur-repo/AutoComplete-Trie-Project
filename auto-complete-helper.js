@@ -1,4 +1,4 @@
-const _getRemainingTree = function (prefix, node) {
+export const _getRemainingTree = function (prefix, node) {
   let currentNode = node;
   let words = [];
   for (const key in currentNode.children) {
@@ -18,7 +18,7 @@ const _getRemainingTree = function (prefix, node) {
   return words;
 };
 
-const _updateWordUsage = function (word, root) {
+export const _updateWordUsage = function (word, root) {
   let currNode = root;
   const chars = word.split("");
   let rank = 0;
@@ -33,11 +33,11 @@ const _updateWordUsage = function (word, root) {
   return rank;
 };
 
-const _reorderWords = function(words)
+export const _reorderWords = function(words)
 {
   return words
     .sort((a, b) => b.rank - a.rank)  
     .map(item => `${item.word} (${item.rank})`);    
 };
 
-module.exports = { _getRemainingTree, _updateWordUsage, _reorderWords };
+// module.exports = { _getRemainingTree, _updateWordUsage, _reorderWords };

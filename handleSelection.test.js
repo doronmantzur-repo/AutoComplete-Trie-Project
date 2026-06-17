@@ -1,5 +1,8 @@
-const { handleSelection } = require("./handleSelection.js");
-const { trieNode } = require("./auto-complete.js");
+// const { handleSelection } = require("./handleSelection.js");
+// const { trieNode } = require("./auto-complete.js");
+
+import {trieNode} from "./auto-complete.js"
+import {handleSelection} from "./handleSelection.js"
 
 describe("Test handleSelection function", () => {
   const root = new trieNode("");

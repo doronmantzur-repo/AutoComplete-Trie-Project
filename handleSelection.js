@@ -1,8 +1,12 @@
 
-const { validateArguments, validateCommand } = require("./validation.js");
-const { handleCommand } = require("./handleCommand.js");
+// const { validateArguments, validateCommand } = require("./validation.js");
+// const { handleCommand } = require("./handleCommand.js");
 
-const handleSelection = function (root, selection) {
+import {handleCommand} from "./handleCommand.js"
+import {validateArguments} from "./validation.js"
+import {validateCommand} from "./validation.js"
+
+export const handleSelection = function (root, selection) {
   selection = selection.split(" ");
   let command = selection[0];
   let argument = "";
@@ -17,7 +21,7 @@ const handleSelection = function (root, selection) {
       argument = selection[1];
     }
 
-    cmdValid = validateArguments(command, argument);
+    let cmdValid = validateArguments(command, argument);
     if (!cmdValid.valid) {
       statusObj.printMsg = cmdValid.errors[0].message;
     } else {
@@ -28,4 +32,4 @@ const handleSelection = function (root, selection) {
   return statusObj;
 };
 
-module.exports = {handleSelection};
+// module.exports = {handleSelection};

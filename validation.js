@@ -1,4 +1,4 @@
-const validateCommand = (command) => {
+export const validateCommand = (command) => {
   const validCommands = ["add", "find", "complete", "help", "exit", "use"];
   const errors = [];
 
@@ -13,7 +13,7 @@ const validateCommand = (command) => {
 };
 
 
-const validateArguments = (command, argument) => {
+export const validateArguments = (command, argument) => {
   const errors = [];
   command = command.toLowerCase();
   if (command === "add" || command === "find" || command === "complete") {
@@ -32,4 +32,4 @@ const validateArguments = (command, argument) => {
   };
 };
 
-module.exports = { validateArguments, validateCommand };
+// module.exports = { validateArguments, validateCommand };

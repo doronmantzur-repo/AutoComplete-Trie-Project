@@ -5,16 +5,16 @@ const helpStr = `Commands:
   help           - Show this message
   exit           - Quit program\n`;
 
-const handleCommand = (root, command, argument) => {
-  words = [];
+export const handleCommand = (root, command, argument) => {
+  let words = [];
   if (argument) {
     argument = argument.toLowerCase();
   }
 
   switch (command.toLowerCase()) {
     case "add":
-      root.addWord(argument);
-      return `${argument} was added successfuly !!\n`;
+      let status = root.addWord(argument);
+      return status;
 
     case "find":
       isExist = root.findWord(argument);
@@ -38,4 +38,4 @@ const handleCommand = (root, command, argument) => {
   }
 };
 
-module.exports = { handleCommand };
+// module.exports = { handleCommand };
