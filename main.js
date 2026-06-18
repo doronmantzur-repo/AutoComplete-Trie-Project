@@ -81,7 +81,8 @@ addEventListener("DOMContentLoaded", () => {
 
   document.querySelector("#suggestion-input").addEventListener("input", (e) => {
     e.preventDefault();
-    const addCommand = `complete ${e.data}`;
+    const input = document.querySelector(".my-label");
+    const addCommand = `complete ${input.value}`;
     let exeStatus = handleSelection(root, addCommand);
     console.log(exeStatus);
     handleAddCompleteWords(exeStatus.printMsg);
